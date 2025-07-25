@@ -37,9 +37,8 @@ ${BOLD}${ROXO}╔═════════════════════
 ║ ${BRANCO}[1] Só fazer push no repositório atual                              ${ROXO}║
 ${ROXO}║ ${BRANCO}[2] Mudar URL do repositório atual                                  ${ROXO}║
 ${ROXO}║ ${BRANCO}[3] Mudar usuário git (nome e email globais)                        ${ROXO}║
-${ROXO}║ ${BRANCO}[4] Só fazer push no repositório atual                              ${ROXO}║
-${ROXO}║ ${BRANCO}[5] Fazer commit e push (padrão)                                    ${ROXO}║
-${ROXO}║ ${BRANCO}[6] Mudar diretório do projeto                                      ${ROXO}║
+${ROXO}║ ${BRANCO}[4] Fazer commit e push (padrão)                                    ${ROXO}║
+${ROXO}║ ${BRANCO}[5] Mudar diretório do projeto                                      ${ROXO}║
 ╠═════════════════════════════════════════════════════════════════════╝${RESET}
 EOF
 )"
@@ -107,16 +106,16 @@ case $opcao in
       git remote add origin "$repo_url"
     fi
 
-    echo "Escolha o tipo de commit:"
-    echo "1) Feat"
-    echo "2) Fix"
-    echo "3) Update"
-    echo "4) Refactor"
-    echo "5) Style"
-    echo "6) Remove"
-    echo "7) Add"
-    echo "8) Docs"
-    echo "9) Chore"
+   echo "Escolha o tipo de commit:"
+   echo "1) Feat      – Nova funcionalidade"
+   echo "2) Fix       – Correção de bug"
+   echo "3) Update    – Atualizações ou ajustes menores"
+   echo "4) Refactor  – Reestruturação do código sem mudar funcionalidade"
+   echo "5) Style     – Alterações visuais ou de formatação"
+   echo "6) Remove    – Remoção de arquivos, funções ou elementos"
+   echo "7) Add       – Adição de arquivos ou recursos básicos"
+   echo "8) Docs      – Documentação ou comentários"
+   echo "9) Chore     – Tarefas auxiliares, manutenção ou configurações"
     read -rp "Tipo: " tipo_num
 
     case $tipo_num in
