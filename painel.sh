@@ -1,14 +1,26 @@
+# Estilos
+BOLD='\e[1m'
+RESET='\e[0m'
+
+# Cores RGB
+ROXO='\e[38;2;128;0;128m'
+VERDE='\e[38;2;0;255;100m'
+AMARELO='\e[38;2;255;215;0m'
+VERMELHO='\e[38;2;220;20;60m'
+CIANO='\e[38;2;0;255;255m'
+BRANCO='\e[97m'
+
 instalar_aplicacoes() {
   termux-setup-storage
 
-  echo "🔁 Atualizando Termux e instalando pacotes..."
+  echo -e "${CIANO}🔁 Atualizando Termux e instalando pacotes...${RESET}"
   pkg update -y && pkg upgrade -y
   pkg install -y git curl wget proot-distro python nodejs ruby perl clang cmake make zsh vim nano figlet toilet cowsay lolcat htop neofetch openssh dnsutils net-tools nmap whois termux-api
 
-  echo "📦 Instalando Ubuntu..."
+  echo -e "${CIANO}📦 Instalando Ubuntu...${RESET}"
   proot-distro install ubuntu
 
-  echo "🐉 Baixando Kali NetHunter..."
+  echo -e "${CIANO}🐉 Baixando Kali NetHunter...${RESET}"
   wget -O install-nethunter-termux https://offs.ec/2MceZWr
   chmod +x install-nethunter-termux
   ./install-nethunter-termux
@@ -59,9 +71,9 @@ atualizar_tudo() {
 }
 
 limpar_cache() {
-  echo "Limpando cache do Termux..."
+  echo -e "${CIANO}🔁 Limpando cache do Termux...${RESET}"
   rm -rf /data/data/com.termux/cache/*
-  echo "Cache limpo!"
+  echo -e "${CIANO}🗑️ Cache limpo!${RESET}"
   echo " "
   read -p "Enter para voltar..."
 }
@@ -117,7 +129,10 @@ submenu_mais_funcoes() {
        echo " "
        read -p "Enter para voltar..." ;;
     0) return ;;
-    *) echo "Opção inválida"; sleep 1 ;;
+
+    *)
+       echo -e "${AMARELO}⚠️ Opção inválida! Tente novamente.${RESET}"
+       sleep 0.5 ;;
   esac
 }
 
@@ -158,12 +173,12 @@ while true; do
     10) submenu_mais_funcoes ;;
     11) ferramentas ;;
     0)
-      echo "Saindo do menu..."
+      echo -e "${VERMELHO}Saindo do menu...${RESET}"
       break ;;
     *)
-      echo "⚠️ Opção inválida! Tente novamente."
-      clear
-      sleep 1 ;;
+      echo -e "${AMARELO}⚠️ Opção inválida! Tente novamente.${RESET}"
+      sleep 0.5 ;;
   esac
   clear
 done
+
