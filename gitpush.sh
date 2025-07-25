@@ -22,7 +22,7 @@ else
 fi
 
 # Tenta acessar o diretório
-cd "$dir" || { echo "❌ Não foi possível acessar: $dir"; exit 1; }
+cd "$dir" || { echo -e "${VERMELHO}❌ Não foi possível acessar:{$RESET} $dir"; exit 1; }
 
 # === MENU PRINCIPAL ===
 echo -e "$(cat <<EOF
@@ -42,12 +42,12 @@ ${ROXO}║ ${BRANCO}[5] Mudar diretório do projeto                             
 ╠═════════════════════════════════════════════════════════════════════╝${RESET}
 EOF
 )"
-  read -rp $'\e[1m\e[38;2;128;0;128m└──>> \e[0m' opcao
+  read -rp $'\e[1;38;2;128;0;128m└──>> \e[0m' opcao
 # === OPÇÕES DO MENU ===
 case $opcao in
   1)
     if ! git rev-parse --verify HEAD >/dev/null 2>&1; then
-      echo -e "\e[1;33m⚠️ Nenhum commit encontrado. Criando commit inicial...\e[0m"
+      echo -e "${AMARELO}⚠️ Nenhum commit encontrado. Criando commit inicial...${RESET}"
       touch README.md
       git add .
       git commit -m "Initial commit"
@@ -56,19 +56,19 @@ case $opcao in
     # Pega a branch atual
     branch=$(git branch --show-current)
 
-    echo -e "\e[1;34mFazendo push na branch '\e[1;35m$branch\e[1;34m'...\e[0m"
+    echo -e "${CIANO}Fazendo push na branch '${ROXO}$branch${CIANO}'...${RESET}"
     git push -u origin "$branch"
     exit 0
     ;;
   2)
     if [ ! -d ".git" ]; then
-      echo -e "\e[1;31m❌ Esse diretório não é um repositório Git.\e[0m"
+      echo -e "${VERDE}❌ Esse diretório não é um repositório Git.${RESET}"
       read -rp "Deseja inicializar com 'git init'? (s/n): " resp
       if [[ "$resp" =~ ^[sS]$ ]]; then
         git init
-        echo -e "\e[1;32m✅ Repositório Git inicializado.\e[0m"
+        echo -e "${VERDE}✅ Repositório Git inicializado.${RESET}"
       else
-        echo "❌ Operação cancelada."
+        echo -e "${VERMELHO}❌ Operação cancelada.${RESET}"
         exit 1
       fi
     fi
@@ -76,10 +76,10 @@ case $opcao in
     read -rp "Digite a nova URL do repositório remoto: " nova_url
     if git remote | grep -q origin; then
       git remote set-url origin "$nova_url"
-      echo -e "\e[1;34m🔄 URL do remoto 'origin' atualizada.\e[0m"
+      echo -e "${CIANO}🔄 URL do remoto 'origin' atualizado.${RESET}"
     else
       git remote add origin "$nova_url"
-      echo -e "\e[1;32m✅ Remoto 'origin' adicionado.\e[0m"
+      echo -e "${VERDE}✅ Remoto 'origin' adicionado.${RESET}"
     fi
     exit 0
     ;;
@@ -144,12 +144,12 @@ case $opcao in
     ;;
   5)
     read -rp "Digite o novo diretório do projeto: " novo_dir
-    cd "$novo_dir" || { echo "❌ Diretório inválido."; exit 1; }
+    cd "$novo_dir" || { echo -e "${VERMELHO}❌ Diretório inválido.${RESET}"; exit 1; }
     echo "$novo_dir" > "$LAST_DIR_FILE"
-    echo "✅ Diretório atualizado e salvo."
+    echo -e "${VERDE}✅ Diretório atualizado e salvo.${RESET}"
     ;;
   *)
-    echo "Opção inválida."
+    echo -e "${VERMELHO}❌ Opção inválida.${RESET}"
     exit 1
     ;;
 esac
