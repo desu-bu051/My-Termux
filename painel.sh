@@ -147,7 +147,9 @@ while true; do
     1) instalar_aplicacoes ;;
     2) ver_atalhos ;;
     3) pacotes_instalados ;;
-    4) bash ~/gitpush.sh ;;
+    4)
+       bash ~/gitpush.sh
+       break ;;
     5) info_sistema ;;
     6) atualizar_tudo ;;
     7) limpar_cache ;;
