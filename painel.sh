@@ -15,7 +15,7 @@ instalar_aplicacoes() {
 
   echo -e "${CIANO}🔁 Atualizando Termux e instalando pacotes...${RESET}"
   pkg update -y && pkg upgrade -y
-  pkg install -y git curl wget proot-distro python nodejs ruby perl clang cmake make zsh vim nano figlet toilet cowsay lolcat htop neofetch openssh dnsutils net-tools nmap whois termux-api
+  pkg install -y git curl wget proot-distro openssl-tool python nodejs ruby perl clang cmake make zsh vim nano figlet toilet cowsay lolcat htop neofetch openssh dnsutils net-tools nmap whois termux-api
 
   echo -e "${CIANO}📦 Instalando Ubuntu...${RESET}"
   proot-distro install ubuntu
@@ -78,6 +78,21 @@ limpar_cache() {
   read -p "Enter para voltar..."
 }
 
+gerador_senhas() {
+read -p "📏 Quantos caracteres deseja na senha? " tamanho
+tamanho=${tamanho:-16}
+
+senha=$(openssl rand -base64 2048 | tr -dc 'A-Za-z0-9!@#%&*' | head -c $tamanho)
+
+echo ""
+echo -e "${VERDE}🔑 Senha gerada com $tamanho caracteres:${RESET}"
+echo -e "${BOLD}$senha${RESET}"
+echo ""
+echo -e "${AMARELO}💡 Dica: Copie e guarde sua senha com segurança.${RESET}"
+echo " "
+read -p "Enter para voltar..."
+}
+
 submenu_mais_funcoes() {
   echo ""
   echo "╔═════════════════════════════════════════════════════════════════════╗"
@@ -87,6 +102,7 @@ submenu_mais_funcoes() {
   echo "║ [3] Abrir calculadora             │ [4] Ver ip                      ║"
   echo "║ [5] Informações do Kernel         │ [6] Variáveis do ambiente       ║"
   echo "║ [7] Usuários que conectam         │ [8] Portas em uso               ║"
+  echo "║ [9] Gerador de senhas             │ [10] Portas em uso              ║"
   echo "╠═════════════════════════════════════════════════════════════════════╣"
   echo "║ [0] Voltar                                                          ║"
   echo "╠═════════════════════════════════════════════════════════════════════╝"
@@ -128,6 +144,8 @@ submenu_mais_funcoes() {
        netstat -tuln
        echo " "
        read -p "Enter para voltar..." ;;
+    9)
+      gerador_senhas ;;
     0) return ;;
 
     *)
