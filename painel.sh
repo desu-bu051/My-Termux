@@ -168,7 +168,7 @@ while true; do
   echo "╠═════════════════════════════════════════════════════════════════════╣"
   echo "║ [1] Instalar Aplicações          │ [2] Ver Atalhos                  ║"
   echo "║ [3] Pacotes Instalados           │ [4] Gitpush                      ║"
-  echo "║ [5] Informações do Sitema        │ [6] Atualizar Tudo               ║"
+  echo "║ [5] Informações do Sistema       │ [6] Atualizar Tudo               ║"
   echo "║ [7] Limpar Cache                 │ [8] Kali Linux                   ║"
   echo "║ [9] Ubuntu                       │ [10] Mais Funções                ║"
   echo "║ [11] Ferramentas                 │                                  ║"
